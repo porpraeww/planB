@@ -1,0 +1,21 @@
+.pointer{
+    cursor: pointer;
+}
+.adj1{
+    line-height: 20%;
+}
+#hide{
+    color: crimson;
+    display: none;
+}
+.dropdown-menu {
+    width: 300px !important;
+    height: 250px !important;
+    line-height: 40%;
+}
+tr{
+    font-size: 15px;
+}
+.lotto .form-control{
+    font-size: 15px;
+}

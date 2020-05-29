@@ -1,0 +1,40 @@
+<%- include("partials/header") %>
+    <link rel="stylesheet" href="/css/game.css">
+    <script src="/js/game.js" defer></script>
+
+<div class="container" style="text-align: center;">
+    <br>
+        <h4>Xo หรรษาพารวย</h4>
+        <br>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="flex-container">
+                    <div data-index="1" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="2" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="3" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+                <div class="flex-container">
+                    <div data-index="4" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="5" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="6" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+                <div class="flex-container">
+                    <div data-index="7" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="8" id="b" onclick="play(this)">&#160;&#160;</div>
+                    <div data-index="9" id="b" onclick="play(this)">&#160;&#160;</div> 
+                </div>
+                <h6>Exusiai: Locked and loaded, ready for action!</h6>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                    <h2>กติกาการเล่น</h1>
+                    <h3>1. ชนะจะได้รับ 3 ชิ้นส่วน เสมอ 1 ชิ้นส่วน แพ้ไม่ได้อะไรเลย</h3>
+                    <h3>2. เล่นได้วันละ 1 ครั้ง และจะเล่นได้มากยิ่งขึ้นหากคุณมีระดับ VIP ที่สูงขึ้น</h3>
+                    <h4>เหลือจำนวนครั้งอีก <span id="proc">1</span> ครั้ง</h4>
+                    <button type="button" class="btn btn-success float-center" id="starter" onclick="start()">เริ่มเกม</button>
+            </div>
+        </div>
+        <!-- <div id="Exusiai" style="text-align: left;">
+            <img src="https://yt3.ggpht.com/a/AGF-l7-kQXKejPQzKBZEYEcml0XtLrIlLkqneL2HnA=s900-c-k-c0xffffffff-no-rj-mo" height="150" weight="150" onclick="talk1()">
+        </div> -->
+</div>
+<%- include("partials/footer") %>

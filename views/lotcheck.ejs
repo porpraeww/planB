@@ -1,0 +1,52 @@
+<%- include("partials/header") %>
+
+	<link rel="stylesheet" href="/css/lotcheck.css">
+	<script src="/js/lotcheck.js" defer></script>
+
+<br>
+<div class="container-fluid">
+	<div class="row justify-content-md-center"> 
+		<div class="col-12 col-md-4 text-center">
+            <h4>ตรวจสลากกินแบ่งรัฐบาล</h4>
+            <!-- <div class="input-group">
+                <input type="text" class="form-control" placeholder="ค้นหา">
+                <button type="button" class="btn btn-primary" onclick="badLuck()">ค้นหา</button>
+			</div> -->
+			<div class="lotto">
+				<select id="inputlotto" class="form-control">
+					<option value="16052563" >16 พฤษภาคม 2563</option>
+					<option value="16032563" >16 มีนาคม 2563</option>
+					<option value="01032563" >1 มีนาคม 2563</option>
+					<option value="16022563" >16 กุมภาพันธ์ 2563</option>
+					<option value="01022563" >1 กุมภาพันธ์ 2563</option>
+					<option value="17012563" >17 มกราคม 2563</option>
+					<option value="30122562" >30 ธันวาคม 2562</option>
+					<option value="16122562" >16 ธันวาคม 2562</option>
+					<option value="01122562" >1 ธันวาคม 2562</option>
+					<option value="16112562" >16 พฤศจิกายน 2562</option>
+				</select>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th scope="col">รางวัลที่</th>
+						<th scope="col">หมายเลขที่ถูกรางวัล</th>
+						<th scope="col">จำนวนเงินรางวัล</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td scope="row"></th>
+						<td></td>
+						<td></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<h id="hide" >เสียใจด้วย คุณไม่ถูกรางวัล</h>
+			
+        </div>
+	</div>
+</div>
+<%- include("partials/footer") %>

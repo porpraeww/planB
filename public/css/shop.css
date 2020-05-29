@@ -1,0 +1,20 @@
+div{
+    font-family: 'K2D', sans-serif;
+}
+.row{
+    align-content: center;
+}
+.container .row .input-group .form-control,
+.container .row .input-group .botton1{
+    font-size: 15px;
+}
+.container .row .container .form-check-inline{
+    font-size: 15px;
+}
+.container .row p{
+    font-size: 15px;
+    margin: 10px;
+}
+.container .row .botton2{
+    font-size: 15px;
+}

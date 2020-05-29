@@ -1,0 +1,51 @@
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #20B2AA;
+  align-items: center;
+}
+/* .flex-container > div {
+background-color: #f1f1f1;
+margin: 5px;
+padding: 2%;
+font-size: 50px;
+} */
+.flex-container > div {
+  background-color: #F5FFFA;
+  color: #8A2BE2;
+  width: 300px;
+  margin: 5px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 40px;
+  padding: 5px;
+}
+.container .row h6{
+  color: crimson;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.container .row h2{
+  font-size: 15px;
+  margin-top: 100px;
+}
+.container .row h3{
+  font-size: 15px;
+}
+.container .row h4{
+  font-size: 15px;
+  margin-top: 15px;
+  color: blue;
+}
+.container .row .btn{
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media only screen and (max-width: 991px){
+  .container .row h2{
+    font-size: 15px;
+    margin-top: 0px;
+    /* margin-bottom: 10px; */
+  }
+}

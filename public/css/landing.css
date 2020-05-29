@@ -1,0 +1,221 @@
+/*slide*/
+*
+{
+    box-sizing: border-box;
+}
+.banner
+{
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+.banner .slide
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    display: none;
+    padding: 0 15px;
+    animation: slide 2s ease;
+}
+.banner .slide.active
+{
+    display: flex;
+}
+@keyframes slide
+{
+    0%
+    {
+        transform:scale(1.1);
+    }
+    100%
+    {
+        transform:scale(1);
+    }
+}
+.container
+{
+    max-width: 1170px;
+    margin: auto;
+    flex-grow: 1;
+}
+.banner .container
+{
+    flex-grow: 1;
+    padding-left: 30px;
+}
+.banner .caption 
+{
+    /* width: 60%;
+    background-color: powderblue;
+    opacity: 0.8; */
+    width: 300px;
+    height: 180px;
+    background-color: white;
+    border: 1px solid;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+    display: table-cell;
+    vertical-align: middle;
+}
+.banner .caption h1
+{
+    font-size: 20px;
+    color: black;
+    margin: 0 20px 10px;
+}
+.banner .slide.slide.active .caption h1
+{
+    opacity: 0;
+    animation: captionText .5s ease forwards;
+    animation-delay: .4s;
+}
+.banner .caption p
+{
+    font-size: 14px;
+    margin: 5px 20px 10px;
+    color: black;
+}
+.banner .slide.slide.active .caption p
+{
+    opacity: 0;
+    animation: captionText .5s ease forwards;
+    animation-delay: .6s;
+}
+.banner .caption a
+{
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 5px 20px 10px;;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+}
+.banner .slide.slide.active .caption a
+{
+    opacity: 0;
+    animation: captionText .5s ease forwards;
+    animation-delay: .8s;
+}
+@keyframes captionText
+{
+    0%
+    {
+        opacity: 0; transform: translateX(-100px);
+    }
+    100%
+    {
+        opacity: 1; transform: translateX(0px);
+    }
+}
+.banner .controls .prev,
+.banner .controls .next
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+.banner .controls .prev:hover,
+.banner .controls .next:hover
+{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: 20px;
+    color: black;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.banner .controls .prev
+{
+    left: 0;
+}
+.banner .controls .next
+{
+    right: 0;
+}
+.banner .indicator
+{
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    z-index: 2;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.banner .indicator div
+{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    margin: 0 3px;
+}
+.banner .indicator div.active
+{
+    background-color: black;
+    color: white;
+}
+
+/* responsive */
+
+@media only screen and (max-width: 780px){
+    .banner .caption h1
+    {
+        font-size: 20px;
+        margin: 5px 20px 5px;
+    }
+    .banner .caption p
+    {
+        font-size: 12px;
+        margin: 10px 20px 15px;
+    }
+    .banner .caption a
+    {
+        font-size: 12px;
+    }
+    .banner .controls .prev,
+    .banner .controls .next
+    {
+        line-height: 20px;
+        font-size: 20px;
+    }
+    .banner .controls .prev:hover,
+    .banner .controls .next:hover
+    {
+        line-height: 20px;
+        font-size: 20px;
+    }
+    .banner .indicator
+    {
+        bottom: 40px;
+        font-size: 12px;
+    }
+    .controls
+    {
+        display:none;
+    }
+}
+/*slide*/

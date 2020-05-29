@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+	
+	</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" defer>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" defer></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" defer></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" defer></script>
+	<link href="https://fonts.googleapis.com/css2?family=K2D:wght@600&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+
+	<link rel="stylesheet" href="/css/header.css">
+	<script src="/js/header.js" defer></script>
+
+</head>
+	<body>
+		<div>
+			<header>
+				<a href="/" class="logo"><img src ="images/khohuai.png"></a>
+				<div class="menu-toggle"></div>
+				<nav>
+					<ul>
+						<li class="active">
+							<a href="/blogs">ร้านค้า</a>
+						</li>
+						<li>
+							<a href="/lotcheck">ตรวจสลาก</a>
+						</li>
+						<li>
+							<a href="#">ขึ้นเงิน</a>
+						</li>
+						<!-- <li>
+							<a href="#">ดีใจจัง! กดแล้วได้ซื้อเลย</a>
+						</li> -->
+						<li>
+							<a href="/game">XO หรรษาพารวย</a>
+						</li>
+						<li>
+							<a href="/cart">
+								<i class="fa fa-shopping-cart fa-lg"></i>
+							</a>
+						</li>
+						<% if(locals.user){ %>
+						<li>
+							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-expanded="false">สวัสดี <%= user.usr %></a>
+							<form class="dropdown-menu p-4 dropdown-menu-left ddlogin" method="POST" action="/users/login">
+								<div class="form-group">
+									<a href="/users/editpro" style="vertical-align: text-bottom; color: black;">ตั้งค่าบัญชีผู้ใช้</a>
+								</div>
+								<div class="form-group">
+									<a href="/users/editmoney" style="vertical-align: text-bottom; color: black;">ตั้งค่าบัญชีรับเงิน</a>
+								</div>
+								<div class="form-group">
+									<a href="#" style="vertical-align: text-bottom; color: crimson;">ตรวจสอบชิ้นส่วน</a>
+								</div>
+								<div class="form-group">
+									<a href="/users/logout" style="vertical-align: text-bottom; color: black">ออกจากระบบ</a>
+								</div> 
+							</form>
+						</li>
+						<% } %>
+						<% if(!locals.user){ %>
+						<li>
+							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-expanded="false">เข้าสู่ระบบ</a>
+								<form class="dropdown-menu p-4 dropdown-menu-left ddlogin" method="POST" action="/users/login">
+									<div class="form-group">
+										<label for="usr">ชื่อผู้ใช้:</label>
+										<input type="text" class="form-control" name="username">
+									</div>
+									<div class="form-group">
+										<label for="pwd">รหัสผ่าน:</label>
+										<input type="password" class="form-control" name="password">
+									</div>
+									<div class="form-group">
+										<a href="/users/register" style="vertical-align: text-bottom; color: black;">สมัครสมาชิก</a>
+										<button type="submit" class="btn btn-primary" style="float: right;" value="login">เข้าสู่ระบบ</button>
+									</div>
+								</form>
+						</li>
+						<% } %>
+					</ul>	
+				</nav>
+				<div class="clearfix"></div>
+			</header>
+		</div>
+	</body>
+</html>
