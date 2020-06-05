@@ -13,6 +13,9 @@ var UserSchema = mongoose.Schema({
 	usr : String,
 	pwd : String,
     email : String,
+    acc : {type: Number},
+    accname : String,
+    bank : String
 });
 
 var User = module.exports = mongoose.model("User", UserSchema);

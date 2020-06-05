@@ -41,7 +41,10 @@ router.get('/logout', function(req, res, next) {
 router.post('/register',[
   check("email", "อีเมลไม่ถูกต้อง").isEmail(),
   check("usr", "กรุณาป้อนชื่อผู้ใช้งาน").not().isEmpty(),
-  check("pwd", "กรุณาป้อนชื่อรหัสผ่าน").not().isEmpty(),
+  check("pwd", "กรุณาป้อนรหัสผ่าน").not().isEmpty(),
+  check("repwd", "กรุณาป้อนรหัสผ่านอีกครั้ง").not().isEmpty(),
+  check("acc", "กรุณาป้อนเลขที่บัญชีให้ถูกต้อง").isInt(),
+  check("accname", "กรุณาป้อนชื่อบัญชี").not().isEmpty(),
 ], function(req, res, next) {
   const result = validationResult(req);
   var errors = result.errors;
@@ -54,7 +57,10 @@ router.post('/register',[
     var n_usr = req.body.usr;
     var n_pwd = req.body.pwd;
     var n_email = req.body.email;
-    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email});
+    var n_acc = req.body.acc;
+    var n_accname = req.body.accname;
+    var n_bank = req.body.bank;
+    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank});
     User.createUser(newUser,function(err,newdata){
         if(err){
             throw error;
