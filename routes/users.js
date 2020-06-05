@@ -69,7 +69,7 @@ router.post('/register',[
 
 router.post('/login', passport.authenticate("local",{
   //ถ้า fail ให้กลับไปหน้าแรก
-  failureRedirect: "/register",
+  failureRedirect: "/users/register",
   failureFlash: false
 }), function(req, res, next) {
   res.redirect("/");
@@ -94,16 +94,24 @@ passport.use(new LocalStrategy(function(username, password, done){
       //ไม่พบผู้ใช้งาน
       return done(null, false);
     }
-    else{
-      return done(null, user);
-      //เทียบ passsword
-      User.comparePassword(passport, user.pwd, function(err, isMatch){
-        if(err) throw err;
-        if(isMatch){
-          return done(null, user);
+    else
+    { 
+      //อีเมลล์ถูกค้อง แล้วค่อยเปรียบเทียบ password
+      User.comparePassword(password,user.pwd,function(err,isMatch)
+      {
+        if(isMatch)
+        {
+          //รหัสผ่านถูกต้อง
+          //return ออกไปเก็บ session ตัวแปร locals.user สามารถเรียกใช้งานได้ทั้งระบบ
+          return done(null,user);
         }
-        else return done(null, false);
-      });
+        else
+        {
+          return done(null,false)
+        }
+
+      })
+      //ส่งไปหา passport.serializeUser
     }
   });
   

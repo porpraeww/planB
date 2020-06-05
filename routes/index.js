@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
+multer = require('multer');
+path = require('path');
 
 let LotterySchema = new mongoose.Schema({
 	number : String,
