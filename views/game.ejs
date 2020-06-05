@@ -30,7 +30,12 @@
                     <h3>1. ชนะจะได้รับ 3 ชิ้นส่วน เสมอ 1 ชิ้นส่วน แพ้ไม่ได้อะไรเลย</h3>
                     <h3>2. เล่นได้วันละ 1 ครั้ง และจะเล่นได้มากยิ่งขึ้นหากคุณมีระดับ VIP ที่สูงขึ้น</h3>
                     <h4>เหลือจำนวนครั้งอีก <span id="proc">1</span> ครั้ง</h4>
-                    <button type="button" class="btn btn-success float-center" id="starter" onclick="start()">เริ่มเกม</button>
+                    <% if(locals.user){ %>
+                        <button type="button" class="btn btn-success float-center" id="starter" onclick="start()">เริ่มเกม</button>
+                    <% } %>
+                    <% if(!locals.user){ %>
+                        <div>กรุณาล็อคอินเพื่อเล่น</div>
+                    <% } %>
             </div>
         </div>
         <!-- <div id="Exusiai" style="text-align: left;">

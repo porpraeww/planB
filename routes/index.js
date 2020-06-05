@@ -2,8 +2,26 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
-multer = require('multer');
-path = require('path');
+var multer = require('multer');
+var path = require('path');
+
+const storage = multer.diskStorage({
+  destination: './public/lotteriesData',
+  filename: function(req, res, cb){
+    cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
+  }
+});
+
+//ฟังก์ชันอัพโหลด image
+const imageFilter = function(req, file, cb){
+  var ext = path.extname(file.originalname);
+  if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){
+    return cb(new Error('Only Image is allowed'), false);
+  }
+  cb(null, true);
+};
+
+const upload = multer({storage: storage, fileFilter: imageFilter});
 
 let LotterySchema = new mongoose.Schema({
 	number : String,

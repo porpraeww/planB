@@ -33,7 +33,7 @@
         <div class="row" style="display:flex; flex-wrap: wrap;">
             <% Lottery.forEach(function(l){ %>
                 <div class="col-sm-6 col-md-3 img-thumbnail" style="text-align: center; margin-bottom: 10px;">
-                    <img class="img-fluid" src=<%= l.image %>>
+                    <img class="img-fluid" src='/lotteriesData/<%= l.image %>'>
                     <p><%= l.number %></p>
                     <p><%= l.price %> บาท</p>
                     <p style="color: crimson;">ส่วนลด -<%= l.discount %>%</p>

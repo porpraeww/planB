@@ -32,6 +32,12 @@
                     </tbody>
                 </table>
             </div>
+            <% if(locals.user){ %>
+                <a class="botton2 btn btn-outline-primary" href="#" role="button">ซื้อเลย</a>
+            <% } %>
+            <% if(!locals.user){ %>
+                <p>กรุณาล็อคอินก่อนสั่งซื้อสลาก</p>
+            <% } %>
         </div>
     </div>
 </div>
