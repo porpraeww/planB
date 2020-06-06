@@ -109,4 +109,8 @@ router.get('/game', function(req, res, next) {
   res.render('game');
 });
 
+router.get('/pay', function(req, res, next) {
+  res.render('pay');
+});
+
 module.exports = router;

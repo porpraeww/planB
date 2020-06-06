@@ -16,7 +16,7 @@
                         <th scope="col">ราคารวม</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-idlot="<%= cart.items %>" id="mycart">
                         <% cart.items.forEach(function(lot){ %>
                             <tr>
                                 <td scope="row"><a href="/blog/lotId=<%= lot.item %>" style="color: black;"><%= lot.number %></a></th>
@@ -33,11 +33,23 @@
                 </table>
             </div>
             <% if(locals.user){ %>
-                <a class="botton2 btn btn-outline-primary" href="#" role="button">ซื้อเลย</a>
+                <form class="form-group" action="/pay" method="GET" >
+                    <input type="submit" name="" value="ซื้อเลย" class="btn btn-primary">
+                </form>
             <% } %>
             <% if(!locals.user){ %>
                 <p>กรุณาล็อคอินก่อนสั่งซื้อสลาก</p>
             <% } %>
+            <!-- <script>
+                $(document).ready(function buyBuyBuy()
+                {
+                    $(document).on('click', '#buy', function()
+                    {
+                        const lotids = $('#mycart').attr('data-idlot');
+                        console.log(lotids);
+                    })
+                })
+            </script> -->
         </div>
     </div>
 </div>
