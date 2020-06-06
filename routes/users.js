@@ -56,21 +56,31 @@ router.post('/register',[
   else{
     var n_usr = req.body.usr;
     var n_pwd = req.body.pwd;
+    var re_pwd = req.body.repwd;
     var n_email = req.body.email;
     var n_acc = req.body.acc;
     var n_accname = req.body.accname;
     var n_bank = req.body.bank;
     var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank});
-    User.createUser(newUser,function(err,newdata){
-        if(err){
-            throw error;
+    if(n_pwd === re_pwd){
+      User.findOne({usr:n_usr}, function(err, user){
+        if(err) throw err;
+        if(!user){
+          User.createUser(newUser,function(err,newdata){
+            if(err){
+              throw error;
+            }
+            else{
+              res.location("/");
+              res.redirect("/");
+            }
+          })
         }
-        else{
-            res.location("/");
-            res.redirect("/");
-        }
-    })
-  }
+        else res.render("register");
+      })
+    }
+    else res.render("register");
+  }    
 });
 
 router.post('/login', passport.authenticate("local",{
@@ -120,7 +130,19 @@ passport.use(new LocalStrategy(function(username, password, done){
       //ส่งไปหา passport.serializeUser
     }
   });
-  
 }));
+
+router.put('/editmoney', [], function(req, res, next){
+  let n_acc = req.body.acc;
+  let n_accname = req.body.accname;
+  let n_bank = req.body.bank;
+  let e_User = {acc:n_acc, accname:n_accname, bank:n_bank};
+  User.findByIdAndUpdate(req.user, e_User, function(err, updatedUser){
+    if(err) throw err;
+    else{
+      res.redirect('/');
+    }
+  })
+});
 
 module.exports = router;

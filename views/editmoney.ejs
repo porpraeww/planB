@@ -6,67 +6,31 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form class="form-group" action="/users/register" method="post">
+                    <form class="form-group" action="/users/editmoney?_method=PUT" method="post">
                         <h4>ข้อมูลช่องทางการรับเงิน</h4>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">ชื่อผู้ใช้</label>
-                            <div class="col-md-6">
-                                <input type="text" name="usr" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">อีเมล์</label>
-                            <div class="col-md-6">
-                                <input type="email" name="email" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">รหัสผ่าน</label>
-                            <div class="col-md-6">
-                                <input type="password" name="pwd" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">ยืนยันรหัสผ่าน</label>
-                            <div class="col-md-6">
-                                <input type="password" name="pwd" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">เบอร์โทรศัพท์</label>
-                            <div class="col-md-6">
-                                <input type="text" name="usr" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">รหัสประจำตัวประชาชน</label>
-                            <div class="col-md-6">
-                                <input type="text" name="usr" value="" class="form-control">
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">เลขที่บัญชี</label>
                             <div class="col-md-6">
-                                <input type="text" name="usr" value="" class="form-control">
+                                <input type="text" name="acc" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">ชื่อบัญชี</label>
                             <div class="col-md-6">
-                                <input type="text" name="usr" value="" class="form-control">
+                                <input type="text" name="accname" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">ธนาคาร</label>
                             <div class="col-md-6">
-                                <select id="inputlotto" class="form-control">
-                                    <option value="" >ธนาคารกรุงเทพ</option>
-                                    <option value="" >ธนาคารกรุงไทย</option>
-                                    <option value="" >ธนาคารกรุงศรีอยุธยา</option>
-                                    <option value="" >ธนาคารกสิกรไทย</option>
-                                    <option value="" >ธนาคารไทยพาณิชย์</option>
-                                    <option value="" >ธนาคารธนชาต</option>
-                                    <option value="" >ธนาคารยูโอบี</option>
+                                <select id="inputlotto" name="bank" class="form-control">
+                                    <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                                    <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                                    <option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา</option>
+                                    <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                                    <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                                    <option value="ธนาคารธนชาติ">ธนาคารธนชาติ</option>
+                                    <option value="ธนาคารยูโอบี">ธนาคารยูโอบี</option>
                                 </select>
                             </div>
                         </div>

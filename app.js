@@ -2,11 +2,11 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 var logger = require('morgan');
 var mongo = require("mongodb");
 const mongoose = require("mongoose");
 var db = mongoose.connect('mongodb://localhost:27017/PlanB', {useNewUrlParser: true,useUnifiedTopology: true});
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var passport = require("passport");
@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 app.get("*", function(req, res, next){
     res.locals.user = req.user || null;
