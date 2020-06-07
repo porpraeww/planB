@@ -31,6 +31,7 @@
 						<li class="active">
 							<a href="/blogs">ร้านค้า</a>
 						</li>
+						<% if(locals.user){ %>
 						<li>
 							<a href="/lotcheck">ตรวจสลาก</a>
 						</li>
@@ -40,6 +41,7 @@
 						<!-- <li>
 							<a href="#">ดีใจจัง! กดแล้วได้ซื้อเลย</a>
 						</li> -->
+						<% } %>
 						<li>
 							<a href="/game">XO หรรษาพารวย</a>
 						</li>
@@ -52,9 +54,6 @@
 						<li>
 							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" aria-expanded="false">สวัสดี <%= user.usr %></a>
 							<form class="dropdown-menu p-4 dropdown-menu-left ddlogin" method="POST" action="/users/login">
-								<div class="form-group">
-									<a href="/users/editpro" style="vertical-align: text-bottom; color: black;">ตั้งค่าบัญชีผู้ใช้</a>
-								</div>
 								<div class="form-group">
 									<a href="/users/editmoney" style="vertical-align: text-bottom; color: black;">ตั้งค่าบัญชีรับเงิน</a>
 								</div>

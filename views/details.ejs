@@ -30,11 +30,16 @@
                     <li class="list-inline-item" id="price"><%= l.price %></li>
                     <li class="list-inline-item"> บาท</li>
                 </ul>
+                <ul class="list-inline type">
+                    <li class="list-inline-item">สินค้าคงเหลือ </li>
+                    <li class="list-inline-item" id="remain"><%= l.remaining %></li>
+                    <li class="list-inline-item"> ชิ้น</li>
+                </ul>
                 <ul class="list-inline buy">
                     <li class="list-inline-item" id="Lot-Type">
                         <!-- ส่งข้อมูลไปยังรถเข็น -->
                             <input type="hidden" name="lot_id" value="<%=l._id%>">
-                            <input type="submit" class="btn btn-success btn-sm" value="เพิ่มไปยังรถเข็น">
+                            <input type="submit" id="submit" class="btn btn-success btn-sm" value="เพิ่มไปยังรถเข็น">
                     </li>
                 </ul>
                 </form>
@@ -43,16 +48,27 @@
         </div>
     </div>
     <script>
+        var start = intial();
+
+        function intial() {
+            var ch = document.getElementById("proc").value;
+            var i = ch.codePointAt(0);
+            var remain = document.getElementById("remain").innerHTML;
+            var r = remain.codePointAt(0);
+            if(i > r){
+                document.getElementById("warning").style.visibility = "visible";
+                document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
+                document.getElementById("submit").style.visibility = "hidden";
+            }
+        }
+
         function onlyNumberKey(evt) { 
-              
               var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
               if (ASCIICode > 31 && (ASCIICode < 49 || ASCIICode > 57)){
                 document.getElementById("warning").style.visibility = "visible";
                 document.getElementById("warning").innerHTML = "กรุณาใส่จำนวนสลาก 1-9 เท่านั้น";
                 return false;
               }
-    
-                
               return true; 
           } 
     
@@ -60,6 +76,8 @@
             var ch = document.getElementById("proc").value;
             var i = ch.codePointAt(0);
             var price = document.getElementById("pricePerOne").innerHTML;
+            var remain = document.getElementById("remain").innerHTML;
+            var r = remain.codePointAt(0);
             if(i < 57){
                 i++;
                 document.getElementById("proc").value = String.fromCodePoint(i);
@@ -67,13 +85,20 @@
                 document.getElementById("warning").style.visibility = "hidden";
             }
             else if(i === 57){
-                document.getElementById("plus").disable = true;
                 document.getElementById("warning").style.visibility = "visible";
                 document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
             }
             if(i === 50){
-                document.getElementById("minus").disable = false;
                 document.getElementById("warning").style.visibility = "hidden";
+                document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
+            }
+            if(i > r){
+                document.getElementById("warning").style.visibility = "visible";
+                document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
+                document.getElementById("submit").style.visibility = "hidden";
+            }
+            else if(i == r){
+                document.getElementById("warning").style.visibility = "visible";
                 document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
             }
             
@@ -82,6 +107,8 @@
             var ch = document.getElementById("proc").value;
             var i = ch.codePointAt(0);
             var price = document.getElementById("pricePerOne").innerHTML;
+            var remain = document.getElementById("remain").innerHTML;
+            var r = remain.codePointAt(0);
             if(i > 49){
                 i--;
                 document.getElementById("proc").value = String.fromCodePoint(i);
@@ -89,17 +116,24 @@
                 document.getElementById("warning").style.visibility = "hidden";
             }
             else if(i === 49){
-                document.getElementById("minus").disable = true;
                 document.getElementById("warning").style.visibility = "visible";
                 document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
             }
             if(i === 56){
-                document.getElementById("plus").disable = false;
                 document.getElementById("warning").style.visibility = "hidden";
                 document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
             }
+            if(i < r){
+                document.getElementById("warning").style.visibility = "hidden";
+                document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
+                document.getElementById("submit").style.visibility = "visible";
+            }
+            else if(i == r){
+                document.getElementById("warning").style.visibility = "visible";
+                document.getElementById("warning").innerHTML = "ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้";
+                document.getElementById("submit").style.visibility = "visible";
+            }
         }
-    
     </script>
 
 <%- include("partials/footer") %>

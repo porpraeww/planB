@@ -27,7 +27,8 @@ let LotterySchema = new mongoose.Schema({
 	number : String,
 	image : String,
 	price : String,
-	discount : String
+  discount : String,
+  remaining : Number
 });
 
 let lot = mongoose.model("lotteries", LotterySchema);
@@ -38,15 +39,24 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/blogs', function(req, res, next) {
-  lot.find({},function(err, all){
+  //เลือกเฉพาะล็อตเตอรี่ที่มีจำนวนเหลือมากกว่า 0
+  lot.find({remaining:{ $gt: 0 }},function(err, all){
     if(err){
-        console.log(err);
+        throw err;
     }
     else
     {
         res.render("shop",{ Lottery : all});
     }
   })
+});
+
+router.get("/search",async function(req, res)
+{
+  let key = req.query.keyword;
+  const result = await lot.find({number:{ $regex: key }});
+  console.log(result);
+  res.render("shop",{Lottery : result, key : key});
 });
 
 router.get('/blog/lotId=:id', async function(req, res, next) {
