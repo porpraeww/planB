@@ -28,10 +28,20 @@ let LotterySchema = new mongoose.Schema({
 	image : String,
 	price : String,
   discount : String,
+  date : Date,
   remaining : Number
 });
 
 let lot = mongoose.model("lotteries", LotterySchema);
+
+let PurchaseInfo = new mongoose.Schema({
+  usr : String,
+  number : String,
+  qty : Number,
+  date : Date
+})
+
+let purchase = mongoose.model("purchase", PurchaseInfo);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -91,7 +101,8 @@ router.post('/cart/', function(req, res){
           item : l._id,
           number : l.number,
 	        price : parseInt(l.price),
-          qty : parseInt(lot_qty)
+          qty : parseInt(lot_qty), 
+          date : l.date
         }});
         }
     }
@@ -121,6 +132,43 @@ router.get('/game', function(req, res, next) {
 
 router.get('/pay', function(req, res, next) {
   res.render('pay');
+});
+
+router.post('/paid', function(req, res){
+  var cart = req.session.cart;
+  var user = req.user;
+  var userUsr = user.usr;
+  for(item in cart){
+    var lotNum = cart[item].number;
+    var lotQty = cart[item].qty;
+    var lotDate = cart[item].date;
+    var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, date: lotDate});
+    purchase.create(newOrder, function(err, pched){
+      if(err){
+        delete req.session.cart;
+        res.render("failurePurchased");
+        throw err;
+      }
+      else {
+        lot.findOne({number: lotNum, date: lotDate}, function(err, l){
+          if(err){
+            throw err;
+          } 
+          else{
+            lot.findOneAndUpdate({number: lotNum, date: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
+              if(err){
+                throw err;
+              } 
+            })
+          }
+        })
+        
+      }
+    })
+    delete req.session.cart;
+    res.render("finishedPurchased");
+  }
+  res.redirect("/");
 });
 
 module.exports = router;

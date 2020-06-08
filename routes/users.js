@@ -112,7 +112,7 @@ passport.use(new LocalStrategy(function(username, password, done){
     }
     else
     { 
-      //อีเมลล์ถูกค้อง แล้วค่อยเปรียบเทียบ password
+      //อีเมลล์ถูกต้อง แล้วค่อยเปรียบเทียบ password
       User.comparePassword(password,user.pwd,function(err,isMatch)
       {
         if(isMatch)
