@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
 var multer = require('multer');
 var path = require('path');
+var User = require("../model/users");
 
 const storage = multer.diskStorage({
   destination: './public/lotteriesData',
@@ -127,7 +128,40 @@ router.get('/lotcheck', function(req, res, next) {
 });
 
 router.get('/game', function(req, res, next) {
-  res.render('game');
+  if(req.user){
+    var user = req.user;
+  User.findOne({_id: user.id}, function(err, thisUser){
+    if(err) throw err;
+    else{
+      res.render('game', {thisUser: thisUser});
+    }
+    })
+  }
+  else{
+    res.redirect("/users/register");
+  }
+});
+
+router.post('/play', function(req, res, next){
+  if(req.user){
+    var user = req.user;
+    User.updateOne({_id: user.id}, {game: 0}, function(err, thisUser){
+      if(err) console.log(err);
+    })
+  }
+  else{
+    res.redirect("/users/register");
+  }
+});
+
+router.post('/win', function(req, res, next){
+  if(req.user){
+    var user = req.user;
+  User.update({_id: user.id}, {$inc:{fragment: 1}}, function(err, thisUser){
+    if(err) throw err;
+  })
+  }
+  res.redirect("/");
 });
 
 router.get('/pay', function(req, res, next) {

@@ -61,7 +61,7 @@ router.post('/register',[
     var n_acc = req.body.acc;
     var n_accname = req.body.accname;
     var n_bank = req.body.bank;
-    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank});
+    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank,game:1,fragment:0});
     if(n_pwd === re_pwd){
       User.findOne({usr:n_usr}, function(err, user){
         if(err) throw err;
@@ -84,7 +84,7 @@ router.post('/register',[
 });
 
 router.post('/login', passport.authenticate("local",{
-  //ถ้า fail ให้กลับไปหน้าแรก
+  //ถ้า fail ให้กลับไปหน้าregister
   failureRedirect: "/users/register",
   failureFlash: false
 }), function(req, res, next) {

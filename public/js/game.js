@@ -1,4 +1,14 @@
 var check = true;
+var isWin = false;
+        function isThisWin(){
+            if(check == true && isWin == true){
+                return;
+            }
+            else{
+                document.getElementById("reward").style.visibility = "hidden";
+            }
+        }
+
         function start(){
             if(Number(document.querySelector("#proc").innerHTML) > 0){
                 check = false;
@@ -22,40 +32,6 @@ var check = true;
         function randomNumber(min, max) {  
             return Math.random() * (max - min) + min; 
         }  
-        function talk1(){
-            const rand = Math.floor(Math.random() * 4);
-            if(rand === 0){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Apple pie!";
-            }
-            else if(rand === 1){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: I'm lovin' this feeling!";
-            }
-            else if(rand === 2){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Let me create a diversion!";
-            }
-            else{
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Rock n' roll!";
-            }
-        }
-        function talk2(){
-            const rand = Math.floor(Math.random() * 3);
-            if(rand === 0){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Is it my turn?";
-            }
-            else if(rand === 1){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Yosh!";
-            }
-            else{
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Yo!";
-            }
-        }
         function play(i){
             if(check === true){
                 return;
@@ -73,12 +49,12 @@ var check = true;
             box[2].innerHTML === "X" && box[5].innerHTML === "X" && box[8].innerHTML === "X" ||
             box[0].innerHTML === "X" && box[4].innerHTML === "X" && box[8].innerHTML === "X" ||
             box[6].innerHTML === "X" && box[4].innerHTML === "X" && box[2].innerHTML === "X" ){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Wonderful! It's your victory, leader.";
                 const r1 = Math.floor(randomNumber(0, 99));
                 const r2 = Math.floor(randomNumber(0, 99));
                 const r3 = Math.floor(randomNumber(0, 99));
-                alert("ยินดีด้วย! คุณได้รับชิ้นส่วนสลาก 3 ชิ้น!\nชิ้นส่วน " + r1 + "!\nชิ้นส่วน " + r2 + "!\nชิ้นส่วน " + r3 + "!");
+                alert("ยินดีด้วย! คุณได้รับชิ้นส่วนสลาก 1 ชิ้น!");
+                document.getElementById("reward").style.visibility = "visible";
+                isWin = true;
                 check = true;
                 return;
             }
@@ -91,15 +67,12 @@ var check = true;
             (box[6].innerHTML === "X" || box[6].innerHTML === "O") &&
             (box[7].innerHTML === "X" || box[7].innerHTML === "O") &&
             (box[8].innerHTML === "X" || box[8].innerHTML === "O")){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: Draw? Not bad at all.";
-                const r1 = Math.floor(randomNumber(0, 99));
-                alert("ยินดีด้วย! คุณได้รับชิ้นส่วนสลาก 1 ชิ้น!\nชิ้นส่วน " + r1 + "!");
+                alert("ไว้ลองใหม่คราวหน้านะ!");
                 check = true;
                 return;
             }
             if(box[4].innerHTML !== "X" && box[4].innerHTML !== "O"){
-                box[4].innerHTML = "O"; talk1();
+                box[4].innerHTML = "O"; 
             }
             else{
                 var defend = -1;
@@ -158,7 +131,7 @@ var check = true;
                         for(;;){
                             const rand = Math.floor(Math.random() * 9);
                             if(box[rand].innerHTML !== "X" && box[rand].innerHTML !== "O"){
-                                box[rand].innerHTML = "O"; talk1(); break;
+                                box[rand].innerHTML = "O"; break;
                             }
                         }
                         break;
@@ -167,7 +140,6 @@ var check = true;
                 if(defend !== -1){
                     box[defend].innerHTML = "O";
                     defend = -1;
-                    talk2();
                 }
             }
             if(box[0].innerHTML === "O" && box[1].innerHTML === "O" && box[2].innerHTML === "O" ||
@@ -178,9 +150,8 @@ var check = true;
             box[2].innerHTML === "O" && box[5].innerHTML === "O" && box[8].innerHTML === "O" ||
             box[0].innerHTML === "O" && box[4].innerHTML === "O" && box[8].innerHTML === "O" ||
             box[6].innerHTML === "O" && box[4].innerHTML === "O" && box[2].innerHTML === "O" ){
-                const text = document.querySelector("h6");
-                text.innerHTML = "Exusiai: GGEZ, leader.";
                 check = true;
+                alert("ไว้ลองใหม่คราวหน้านะ!");
                 return;
             }
         }

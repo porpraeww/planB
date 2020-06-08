@@ -2,6 +2,7 @@
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
 var bcrypt = require('bcryptjs');
+var cron = require('node-cron');
 
 mongoose.connect(mongoDB, {useNewUrlParser: true,useUnifiedTopology: true});
 
@@ -15,7 +16,9 @@ var UserSchema = mongoose.Schema({
     email : String,
     acc : {type: Number},
     accname : String,
-    bank : String
+    bank : String,
+    game : Number,
+    fragment : Number
 });
 
 var User = module.exports = mongoose.model("User", UserSchema);
@@ -46,3 +49,13 @@ module.exports.comparePassword = function(password, hash, callback) {
         callback(null, isMatch);
     });
 }
+
+cron.schedule('0 0 * * *', () => {
+    User.updateMany({}, {game: 1}, function(err, gameSet){
+        if(err) throw err;
+     })
+        , {
+    scheduled: true,
+    timezone: "Asia/Bangkok"
+    }
+    });
