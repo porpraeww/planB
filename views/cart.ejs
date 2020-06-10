@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
 <br>
-    <div class="row justify-content-md-center"> 
+    <div class="row justify-content-md-center" style="min-height: 400px;">  
         <div class="col-12 col-md-8 text-center">
             <h4>ตะกร้าสินค้า</h4>
             <div class="table-responsive">
@@ -14,16 +14,20 @@
                         <th scope="col">ราคาต่อชิ้น</th>
                         <th scope="col">จำนวน</th>
                         <th scope="col">ราคารวม</th>
+                        <th scope="col">ตัวเลือก</th>
                     </tr>
                     </thead>
                     <tbody data-idlot="<%= cart.items %>" id="mycart">
                         <% cart.items.forEach(function(lot){ %>
+                            <% if(lot.qty != 0) { %>
                             <tr>
                                 <td scope="row"><a href="/blog/lotId=<%= lot.item %>" style="color: black;"><%= lot.number %></a></th>
                                 <td><%= lot.price %> บาท</td>
                                 <td><%= lot.qty %> ชิ้น</td>
                                 <td><%= (lot.price * lot.qty) %> บาท</td>
+                                <td><form action="/cart/deleteLotId=<%= lot.item %>" method="POST"><button type="submit" class="btn btn-danger">ลบสินค้า</button></form></td>
                             </tr>
+                            <% } %>
                         <% }) %>
                         <tr>
                             <td colspan="3">ราคารวมทั้งหมด</td>
@@ -33,10 +37,14 @@
                 </table>
             </div>
             <% if(locals.user){ %>
-                <form class="form-group" action="/pay" method="GET" >
+                <form class="form-group" action="/pay" method="GET">
                     <input type="submit" name="" value="ซื้อเลย" class="btn btn-primary">
                 </form>
             <% } %>
+                    
+            <form class="form-group" action="/cart/deleteAll" method="POST">
+                <input type="submit" name="" value="ล้างตระกร้า" class="btn btn-primary">
+            </form>
             <% if(!locals.user){ %>
                 <p>กรุณาล็อคอินก่อนสั่งซื้อสลาก</p>
             <% } %>

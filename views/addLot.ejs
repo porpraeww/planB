@@ -1,0 +1,21 @@
+<form method="post" id="user_form" action="/admin/add" enctype="multipart/form-data">
+    <label>หมายเลขสลาก</label>
+    <input type="text" name="number" id="number" class="form-control" />
+    <br/>
+    <label>ราคา</label>
+    <input type="text" name="price" id="price" class="form-control" />
+    <br/>
+    <label>ส่วนลด</label>
+    <input type="text" name="discount" id="discount" class="form-control" />
+    <br/>
+    <label>งวดที่ออก</label>
+    <input type="text" name="date" id="date" class="form-control" placeholder="YYYY-MM-DD" />
+    <br/>
+    <label>จำนวนสลาก</label>
+    <input type="text" name="remain" id="remain" class="form-control" />
+    <br/>
+    <label>แนบรูปสลาก</label>
+    <input type="file" name="lot_image" id="lot_image" />
+    <span id="user_uploaded_image"></span>
+    <input type="submit" name="action" id="addLotBtn" class="btn btn-success" value="เพิ่ม" />
+</form>

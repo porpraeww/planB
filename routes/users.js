@@ -11,15 +11,6 @@ router.get('/', enSureAuthenticated, function(req, res, next) {
   res.render("landing.ejs");
 });
 
-function enSureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  else{
-    res.redirect("/");
-  }
-}
-
 router.get('/editpro', function(req, res, next) {
   res.render('editpro');
 });
@@ -61,7 +52,7 @@ router.post('/register',[
     var n_acc = req.body.acc;
     var n_accname = req.body.accname;
     var n_bank = req.body.bank;
-    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank,game:1,fragment:0});
+    var newUser = new User({usr:n_usr,pwd:n_pwd,email:n_email,acc:n_acc,accname:n_accname,bank:n_bank,game:1,fragment:0,admin:false});
     if(n_pwd === re_pwd){
       User.findOne({usr:n_usr}, function(err, user){
         if(err) throw err;
@@ -87,7 +78,7 @@ router.post('/login', passport.authenticate("local",{
   //ถ้า fail ให้กลับไปหน้าregister
   failureRedirect: "/users/register",
   failureFlash: false
-}), function(req, res, next) {
+}), isAdmin, function(req, res, next) {
   res.redirect("/");
 });
 
@@ -144,5 +135,23 @@ router.put('/editmoney', [], function(req, res, next){
     }
   })
 });
+
+function enSureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  else{
+    res.redirect("/");
+  }
+}
+
+function isAdmin(req, res, next){
+  var user = req.user;
+  if(user.admin){
+    res.redirect("/admin/");
+  }
+  else return next();
+}
+
 
 module.exports = router;

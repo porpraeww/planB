@@ -2,44 +2,16 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
-var multer = require('multer');
 var path = require('path');
 var User = require("../model/users");
-
-const storage = multer.diskStorage({
-  destination: './public/lotteriesData',
-  filename: function(req, res, cb){
-    cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
-  }
-});
-
-//ฟังก์ชันอัพโหลด image
-const imageFilter = function(req, file, cb){
-  var ext = path.extname(file.originalname);
-  if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg'){
-    return cb(new Error('Only Image is allowed'), false);
-  }
-  cb(null, true);
-};
-
-const upload = multer({storage: storage, fileFilter: imageFilter});
-
-let LotterySchema = new mongoose.Schema({
-	number : String,
-	image : String,
-	price : String,
-  discount : String,
-  date : Date,
-  remaining : Number
-});
-
-let lot = mongoose.model("lotteries", LotterySchema);
+var lot = require("../model/lottery");
 
 let PurchaseInfo = new mongoose.Schema({
   usr : String,
   number : String,
   qty : Number,
-  date : Date
+  date : Date,
+  orderTime : Date
 })
 
 let purchase = mongoose.model("purchase", PurchaseInfo);
@@ -111,6 +83,22 @@ router.post('/cart/', function(req, res){
     })
 });
 
+router.post('/cart/deleteLotId=:id', function(req, res){
+  var lot_id = req.params.id;
+  if(req.session.cart){
+    var cart = req.session.cart;
+    cart[lot_id].qty = 0;
+  }
+  res.redirect('/cart');
+});
+
+router.post('/cart/deleteAll', function(req, res){
+  if(req.session.cart){
+    delete req.session.cart;
+  }
+  res.redirect('/cart');
+});
+
 router.get('/cart', function(req, res){
   var cart = req.session.cart; //ตะกร้า
   var displayCart = { items:[], total:0 };
@@ -169,6 +157,8 @@ router.get('/pay', function(req, res, next) {
 });
 
 router.post('/paid', function(req, res){
+  var moment = require("moment");
+  var now = moment().format("YYYY-MM-DDTHH:mm");
   var cart = req.session.cart;
   var user = req.user;
   var userUsr = user.usr;
@@ -176,7 +166,7 @@ router.post('/paid', function(req, res){
     var lotNum = cart[item].number;
     var lotQty = cart[item].qty;
     var lotDate = cart[item].date;
-    var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, date: lotDate});
+    var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, date: lotDate, orderTime: now});
     purchase.create(newOrder, function(err, pched){
       if(err){
         delete req.session.cart;
@@ -189,7 +179,7 @@ router.post('/paid', function(req, res){
             throw err;
           } 
           else{
-            lot.findOneAndUpdate({number: lotNum, date: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
+            lot.updateOne({number: lotNum, date: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
               if(err){
                 throw err;
               } 
@@ -202,7 +192,9 @@ router.post('/paid', function(req, res){
     delete req.session.cart;
     res.render("finishedPurchased");
   }
-  res.redirect("/");
 });
+
+
+
 
 module.exports = router;

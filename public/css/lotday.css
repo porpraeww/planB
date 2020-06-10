@@ -1,0 +1,37 @@
+.w3-bar-item:link{
+    text-decoration: none;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+.w3-sidebar a{
+    font-size: 18px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+.head h3{
+    height: 46px;
+    padding-top: 5px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+.button{
+    font-size: 15px;
+    font-family: 'Bai Jamjuree', sans-serif;
+    float: right;
+}
+.container h4{
+    text-align: center;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+.form-row{
+    display: flex;
+    justify-content: center;
+}
+.table{
+    text-align: center;
+}
+.table tr th{
+    font-size: 15px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+.modal-body{
+    font-size: 15px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}

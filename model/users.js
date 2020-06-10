@@ -18,7 +18,8 @@ var UserSchema = mongoose.Schema({
     accname : String,
     bank : String,
     game : Number,
-    fragment : Number
+    fragment : Number,
+    admin : Boolean
 });
 
 var User = module.exports = mongoose.model("User", UserSchema);
@@ -29,8 +30,7 @@ module.exports.createUser = function(newUser, callback){
             newUser.pwd = hash;
             newUser.save(callback);
         });
-    });
-    
+    }); 
 };
 
 //ค้นหา user ในระบบจาก id

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/lotday.css">
+    <script src="/js/lotday.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@600&display=swap" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" defer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body>    
+    <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+      <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+      <a href="#" class="logo"><img src ="/images/khohuai.png"></a>
+      <a href="/admin/add" class="w3-bar-item w3-button">เพิ่ม/ลบ สลาก</a>
+      <a href="/admin/lotday" class="w3-bar-item w3-button">ผลออกสลาก</a>
+      <a href="/admin/status" class="w3-bar-item w3-button">สถานะการโอนเงิน</a>
+    </div>
+    <div class="w3-main" style="margin-left:200px">
+      <div class="w3-teal">
+        <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+        <div class="head w3-container">
+          <h3>ผู้ดูแลระบบ</h3>
+        </div>
+      </div>
+      <div class="container col-sm-12" style="min-height: 400px">
+        <br>
+        <h4>ผลออกสลาก</h4>
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-1.5 col-1.5">
+                <input class="form-control" type="text" placeholder="YYYY-MM-DD" id="one">
+            </div>
+            <div class="form-group col-md-1 col-3">
+                <input type="number" class="form-control" id="two" placeholder="รางวัลที่" min="1" max="5">
+            </div>
+            <div class="form-group col-md-2 col-5">
+                <input type="text" class="form-control" id="three" placeholder="หมายเลขที่ถูกรางวัล">
+            </div>
+            <div class="form-group col-md-2 col-4">
+                <input type="text" class="form-control" id="four" placeholder="จำนวนเงินรางวัล">
+            </div>
+            <div class="form-group col-md-2 col-4">
+                <button type="button" class="btn btn-primary" onclick="add()">เพิ่ม</button>
+                <button type="button" class="btn btn-success"onclick="update()">อัพเดต</button>
+            </div>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <th>ลำดับที่</th>
+                <th>วัน/เดือน/ปี</th>
+                <th>รางวัลที่</th>
+                <th>หมายเลขที่ถูกรางวัล</th>
+                <th>จำนวนเงินรางวัล</th>
+            </thead>
+                <tbody id="data"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

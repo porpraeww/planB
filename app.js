@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 var db = mongoose.connect('mongodb://localhost:27017/PlanB', {useNewUrlParser: true,useUnifiedTopology: true});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var session = require('express-session');
@@ -36,6 +37,7 @@ app.use(methodOverride('_method'));
 app.get("*", function(req, res, next){
     res.locals.user = req.user || null;
     res.locals.cart = req.cart || null;
+    res.locals.admin = req.admin || null;
     next();
 });
 
@@ -45,6 +47,7 @@ app.listen(3001, function(req,res){
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 
 
 // เอาออกเพราะสร้าง error ใหม่ขึ้นมาเอง
