@@ -8,22 +8,19 @@
 	<div class="row justify-content-md-center"> 
 		<div class="col-12 col-md-6 text-center" style="min-height: 400px;">
             <h4>ตรวจสลากกินแบ่งรัฐบาล</h4>
-            <!-- <div class="input-group">
-                <input type="text" class="form-control" placeholder="ค้นหา">
-                <button type="button" class="btn btn-primary" onclick="badLuck()">ค้นหา</button>
-			</div> -->
 			<div class="lotto">
-				<select id="inputlotto" class="form-control">
-					<option value="16052563" >16 พฤษภาคม 2563</option>
-					<option value="16032563" >16 มีนาคม 2563</option>
-					<option value="01032563" >1 มีนาคม 2563</option>
-					<option value="16022563" >16 กุมภาพันธ์ 2563</option>
-					<option value="01022563" >1 กุมภาพันธ์ 2563</option>
-					<option value="17012563" >17 มกราคม 2563</option>
-					<option value="30122562" >30 ธันวาคม 2562</option>
-					<option value="16122562" >16 ธันวาคม 2562</option>
-					<option value="01122562" >1 ธันวาคม 2562</option>
-					<option value="16112562" >16 พฤศจิกายน 2562</option>
+				<select id="tInput" class="tInput" data-winner="<%= w %>" onchange="show()">
+					<option value="99" selected>ทั้งหมด</option>
+					<option value="1" >16 พฤษภาคม 2563</option>
+					<option value="2" >16 มีนาคม 2563</option>
+					<option value="3" >1 มีนาคม 2563</option>
+					<option value="4" >16 กุมภาพันธ์ 2563</option>
+					<option value="5" >1 กุมภาพันธ์ 2563</option>
+					<option value="6" >17 มกราคม 2563</option>
+					<option value="7" >30 ธันวาคม 2562</option>
+					<option value="8" >16 ธันวาคม 2562</option>
+					<option value="9" >1 ธันวาคม 2562</option>
+					<option value="10" >16 พฤศจิกายน 2562</option>
 				</select>
 			</div>
 			<div class="table-responsive">
@@ -36,11 +33,14 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<td scope="row"></th>
-						<td></td>
-						<td></td>
-					</tr>
+					<% w.forEach(function(w){ %>
+						<tr id="a<%= w.t %>" class="res" style="visibility: hidden;">
+							<td scope="row"><%= w.rank %></td>
+							<td><%= w.number %></td>
+							<td><%= w.prize %></td>
+						</tr>
+					<% }); %>
+						
 					</tbody>
 				</table>
 			</div>
@@ -49,4 +49,30 @@
         </div>
 	</div>
 </div>
+
+<script>
+	var previous = 99;
+	function show(){
+		var tInp = document.getElementById("tInput").value;
+		var tId = "#a" + tInp;
+		console.log(tId);
+		if(tInp != 99){
+			var tIdAll = document.querySelectorAll(tId);
+			var i;
+			for(i = 0; i < tIdAll.length; i++){
+				tIdAll[i].style.visibility = "visible";
+			}
+			if(previous != 99 && previous != tInp){
+				var preId = "#a" + previous;
+				console.log(preId);
+				preIdAll = document.querySelectorAll(preId);
+				for(i = 0; i < preIdAll.length; i++){
+					preIdAll[i].style.visibility = "hidden";
+				}
+			}
+			previous = tInp;
+		}
+	}
+
+</script>
 <%- include("partials/footer") %>

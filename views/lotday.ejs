@@ -15,7 +15,7 @@
   <body>    
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
       <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
-      <a href="#" class="logo"><img src ="/images/khohuai.png"></a>
+      <a href="/" class="logo"><img src ="/images/khohuai.png"></a>
       <a href="/admin/add" class="w3-bar-item w3-button">เพิ่ม/ลบ สลาก</a>
       <a href="/admin/lotday" class="w3-bar-item w3-button">ผลออกสลาก</a>
       <a href="/admin/status" class="w3-bar-item w3-button">สถานะการโอนเงิน</a>
@@ -31,34 +31,50 @@
         <br>
         <h4>ผลออกสลาก</h4>
         <br>
+        <form action="/admin/prize" method="POST">
         <div class="form-row">
             <div class="form-group col-md-1.5 col-1.5">
-                <input class="form-control" type="text" placeholder="YYYY-MM-DD" id="one">
+                <input class="form-control" type="text" name="t" placeholder="งวดที่" id="one">
             </div>
             <div class="form-group col-md-1 col-3">
-                <input type="number" class="form-control" id="two" placeholder="รางวัลที่" min="1" max="5">
+                <input type="text" class="form-control" name="rank" id="two" placeholder="รางวัลที่">
             </div>
             <div class="form-group col-md-2 col-5">
-                <input type="text" class="form-control" id="three" placeholder="หมายเลขที่ถูกรางวัล">
+                <input type="text" class="form-control" name="number" id="three" placeholder="หมายเลขที่ถูกรางวัล">
             </div>
             <div class="form-group col-md-2 col-4">
-                <input type="text" class="form-control" id="four" placeholder="จำนวนเงินรางวัล">
+                <input type="text" class="form-control" name="prize" id="four" placeholder="จำนวนเงินรางวัล">
             </div>
             <div class="form-group col-md-2 col-4">
-                <button type="button" class="btn btn-primary" onclick="add()">เพิ่ม</button>
-                <button type="button" class="btn btn-success"onclick="update()">อัพเดต</button>
+                <button type="submit" class="btn btn-primary">เพิ่ม</button>
             </div>
         </div>
+        </form>
 
         <table class="table table-hover">
             <thead>
                 <th>ลำดับที่</th>
-                <th>วัน/เดือน/ปี</th>
+                <th>งวดที่</th>
                 <th>รางวัลที่</th>
                 <th>หมายเลขที่ถูกรางวัล</th>
                 <th>จำนวนเงินรางวัล</th>
+                <th>ลบ</th>
             </thead>
-                <tbody id="data"></tbody>
+            <% Prize.forEach(function(p){ %>
+                <tbody id="data">
+                  <tr>
+                    
+                    <form method="post" action="/admin/deletePrize=<%= p._id %>">
+                      <th></th>
+                      <th><%= p.t %></th>
+                      <th><%= p.rank %></th>
+                      <th><%= p.number %></th>
+                      <th><%= p.prize %></th>
+                      <th><button type="submit" class="btn btn-danger">ลบ</button></th>
+                    </form>
+                  </tr>
+                </tbody>
+            <% }) %>
         </table>
       </div>
     </div>

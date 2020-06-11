@@ -5,16 +5,9 @@ var mongoDB = 'mongodb://localhost:27017/PlanB';
 var path = require('path');
 var User = require("../model/users");
 var lot = require("../model/lottery");
-
-let PurchaseInfo = new mongoose.Schema({
-  usr : String,
-  number : String,
-  qty : Number,
-  date : Date,
-  orderTime : Date
-})
-
-let purchase = mongoose.model("purchase", PurchaseInfo);
+var prize = require("../model/prize");
+var winner = require("../model/winner");
+var purchase = require("../model/purchase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -40,6 +33,11 @@ router.get("/search",async function(req, res)
   const result = await lot.find({number:{ $regex: key }});
   console.log(result);
   res.render("shop",{Lottery : result, key : key});
+});
+
+
+router.get('/history', function(res, req){
+  
 });
 
 router.get('/blog/lotId=:id', async function(req, res, next) {
@@ -75,13 +73,14 @@ router.post('/cart/', function(req, res){
           number : l.number,
 	        price : parseInt(l.price),
           qty : parseInt(lot_qty), 
-          date : l.date
+          t : l.t
         }});
         }
     }
       res.redirect("/cart");
     })
 });
+
 
 router.post('/cart/deleteLotId=:id', function(req, res){
   var lot_id = req.params.id;
@@ -112,7 +111,16 @@ router.get('/cart', function(req, res){
 });
 
 router.get('/lotcheck', function(req, res, next) {
-  res.render('lotcheck');
+  if(req.user){
+    let user = req.user.usr;
+    winner.find({usr: user}, function(err, w){
+      if(err) console.log(err);
+      else{
+        console.log(w);
+        res.render('lotcheck', {w : w});
+      } 
+    })
+  }
 });
 
 router.get('/game', function(req, res, next) {
@@ -165,8 +173,8 @@ router.post('/paid', function(req, res){
   for(item in cart){
     var lotNum = cart[item].number;
     var lotQty = cart[item].qty;
-    var lotDate = cart[item].date;
-    var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, date: lotDate, orderTime: now});
+    var lotDate = cart[item].t;
+    var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, t: lotDate, orderTime: now});
     purchase.create(newOrder, function(err, pched){
       if(err){
         delete req.session.cart;
@@ -174,12 +182,12 @@ router.post('/paid', function(req, res){
         throw err;
       }
       else {
-        lot.findOne({number: lotNum, date: lotDate}, function(err, l){
+        lot.findOne({number: lotNum, t: lotDate}, function(err, l){
           if(err){
             throw err;
           } 
           else{
-            lot.updateOne({number: lotNum, date: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
+            lot.updateOne({number: lotNum, t: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
               if(err){
                 throw err;
               } 

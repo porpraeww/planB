@@ -5,7 +5,7 @@ let LotterySchema = new mongoose.Schema({
 	image : String,
 	price : String,
   discount : String,
-  date : String,
+  t : Number,
   remaining : Number
 });
 
