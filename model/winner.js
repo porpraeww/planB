@@ -6,7 +6,9 @@ let WinnerSchema = new mongoose.Schema({
     t : Number,
     rank : String,
     prize : Number,
-    status : Boolean
+    orderTime : Date,
+    status : Boolean,
+    image : String
   });
   
   module.exports = mongoose.model("winners", WinnerSchema);

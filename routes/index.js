@@ -35,11 +35,6 @@ router.get("/search",async function(req, res)
   res.render("shop",{Lottery : result, key : key});
 });
 
-
-router.get('/history', function(res, req){
-  
-});
-
 router.get('/blog/lotId=:id', async function(req, res, next) {
   const { id } = req.params;
   const product = await lot.findById(id);
@@ -116,7 +111,6 @@ router.get('/lotcheck', function(req, res, next) {
     winner.find({usr: user}, function(err, w){
       if(err) console.log(err);
       else{
-        console.log(w);
         res.render('lotcheck', {w : w});
       } 
     })

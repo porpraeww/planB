@@ -7,23 +7,33 @@
         <div class="col-12 col-md-8 text-center">
             <h4>ประวัติการซื้อ</h4>
             <div class="table-responsive">
+                <% if(hist.length == 0) { %>
+                    <p>ไม่พบประวัติการซื้อ</p>
+                <% } %>
+                    
+                <% if(hist.length != 0) { %>
                 <table class="table table-hover">
                     <thead>
-                        <th scope="col">ผู้ใช้</th>
+                        <th scope="col">หมายเลขสั่งซื้อ</th>
+                        <th scope="col">เวลาซื้อ</th>
+                        <th scope="col">งวดสลาก</th>
                         <th scope="col">หมายเลขสลาก</th>
                         <th scope="col">จำนวน (ชิ้น)</th>
-                        <th scope="col">งวดสลาก</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <% hist.forEach(function (h) { %>
+                            <tr>
+                                <td><%= h._id %></td>
+                                <td><%= m(h.orderTime).format("DD-MMMM-YYYY HH:mm") %></td>
+                                <td><%= h.t %></td>
+                                <td><%= h.number %></td>
+                                <td><%= h.qty %></td>
+                            </tr>
+                        <% }) %>
                     </tbody>
                 </table>
+                <% } %>
             </div>
         </div>
     </div>

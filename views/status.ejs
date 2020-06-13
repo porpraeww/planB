@@ -32,20 +32,41 @@
         <br>
         <table class="table table-hover">
             <thead>
-                <th>วัน/เดือน/ปี</th>
+                <th>งวด</th>
+                <th>วัน/เดือน/ปี ที่ซื้อ</th>
                 <th>รางวัลที่ถูก</th>
                 <th>หมายเลขที่ถูกรางวัล</th>
                 <th>จำนวนเงินรางวัล</th>
                 <th>สถานะ</th>
+                <th>หลักฐานการโอน</th>
             </thead>
             <tbody>
+              <% Winner.forEach(function(w){ %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>โอนแล้ว</td>
+                    <td><%= w.t %></td>
+                    <td><%= m(w.orderTime).format("DD-MMMM-YYYY HH:mm") %></td>
+                    <td><%= w.rank %></td>
+                    <td><%= w.number %></td>
+                    <td><%= w.prize %></td>
+                    <% if(w.status == false) { %>
+                      <td>ยังไม่โอน</td>
+                      <td>
+                        <form method="post" id="status_update" action="/admin/transfer/<%= w._id %>" enctype="multipart/form-data">
+                          <input type="file" name="trans" required/><button type="submit" class="btn btn-success">อัพโหลด</button>
+                        </form>
+                      </td>
+                    <% } %>
+                    <% if(w.status == true) { %>
+                      <td>โอนแล้ว</td>
+                      <td>
+                        <form method="post" id="status_update" action="/admin/transfer/<%= w._id %>" enctype="multipart/form-data">
+                          <input type="file" name="trans" required/><button type="submit" class="btn btn-success">อัพเดท</button>
+                        </form>
+                      </td>
+                    <% } %>
+                    
                 </tr>
+              <% }); %>
             </tbody>
         </table>
       </div>

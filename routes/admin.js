@@ -4,12 +4,15 @@ var mongoose = require("mongoose");
 var mongoDB = 'mongodb://localhost:27017/PlanB';
 var path = require('path');
 var multer = require('multer');
+var moment = require("moment");
 var LocalStrategy = require("passport-local").Strategy;
 var lot = require("../model/lottery");
 var prize = require("../model/prize");
 var User = require("../model/users");
 var winner = require("../model/winner");
 var purchase = require("../model/purchase");
+
+const { compileClientWithDependenciesTracked } = require('jade');
 
 const storage = multer.diskStorage({
   destination: './public/lotteriesData',
@@ -28,6 +31,15 @@ const imageFilter = function(req, file, cb){
 };
 
 const upload = multer({storage: storage, fileFilter: imageFilter});
+
+const storage2 = multer.diskStorage({
+  destination: './public/transferData',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + '-' +  Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload2 = multer({storage: storage2, fileFilter: imageFilter});
 
   router.get('/', isAdmin, function(req, res, next) {
     res.render("homepage.ejs");
@@ -59,12 +71,27 @@ const upload = multer({storage: storage, fileFilter: imageFilter});
   });
 
   router.get('/status', isAdmin, function(req, res, next) {
-    res.render('status');
+    winner.find({}, function(err, all){
+      if(err) console.log(err);
+      else{
+        res.render('status', {Winner : all, m : moment});
+      }
+    })
   });
+
+router.post("/transfer/:id", upload2.single('trans'), function(req, res){
+  let t_id = req.params.id;
+  winner.findByIdAndUpdate({_id: t_id}, {status: true, image: req.file.filename}, function(err, transfered){
+    if(err) console.log(err);
+    else{
+      res.redirect('/admin/status');
+    }
+  })
+});
 
 router.post("/add", upload.single('lot_image'), function(req, res) {
   let n_num = req.body.number;
-  let n_img = req.file.filename; console.log(n_img);
+  let n_img = req.file.filename;
   let n_price = req.body.price;
   let n_discount = req.body.discount;
   let n_date = req.body.date;
@@ -119,7 +146,8 @@ router.post("/prize", isAdmin, function(req, res){
     else{
       purchased.forEach(element =>{ 
         let n_usr = element.usr;
-        let n_winner = {usr:n_usr, number:n_number, t:n_date, rank:n_rank, prize:n_prize, status:false}
+        let n_orderTime = element.orderTime;
+        let n_winner = {usr:n_usr, number:n_number, t:n_date, rank:n_rank, prize:n_prize, orderTime: n_orderTime, status:false, image:"#"}
         winner.create(n_winner, function(err, won){
           if(err) console.log(err);
         })

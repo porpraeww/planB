@@ -1,8 +1,10 @@
 //this is router
 var express = require('express');
+var moment = require("moment");
 var router = express.Router();
 const {check, validationResult} = require("express-validator");
 var User = require("../model/users");
+var purchase = require("../model/purchase");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
@@ -21,6 +23,18 @@ router.get('/editmoney', function(req, res, next) {
 
 router.get('/register', function(req, res, next) {
   res.render('register');
+});
+
+router.get('/history', function(req, res){
+  if(req.user){
+    let user = req.user.usr;
+    purchase.find({usr: user}, function(err, hist){
+      if(err) console.log(err);
+      else{
+        res.render("history", {hist : hist, m : moment});
+      }
+    })
+  }
 });
 
 router.get('/logout', function(req, res, next) {
