@@ -26,6 +26,9 @@
             </div>
             <p>คำเตือน : เมื่อซื้อสินค้าแล้วไม่สามารถยกเลิกได้ และไม่ขอรับประกันความปลอดภัยข้อมูลของบัตรเครดิตของท่าน!!</p>
             <% if(locals.user){ %>
+                <form class="form-group" action="/paidByFrag" method="POST" >
+                    <input type="submit" name="" value="ชำระด้วยชิ้นส่วนสลาก" class="btn btn-primary">
+                </form>
                 <form class="form-group" action="/paid" method="POST" >
                     <input type="submit" name="" value="ชำระเงิน" class="btn btn-primary">
                 </form>

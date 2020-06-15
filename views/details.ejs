@@ -20,6 +20,7 @@
                     <li class="list-inline-item" id="Lot-Type"><button type="button" class="btn btn-secondary btn-sm" id="plus" onclick=Inc()>+</button></li>
                 </ul>
                 <p id="warning">ไม่สามารถเพิ่ม/ลดจำนวนสลากไปกว่านี้</p>
+
                 <ul class="list-inline type">
                     <li class="list-inline-item">ราคาต่อสลาก </li>
                     <li class="list-inline-item" id="pricePerOne"><%= l.price %></li>
@@ -30,11 +31,20 @@
                     <li class="list-inline-item" id="price"><%= l.price %></li>
                     <li class="list-inline-item"> บาท</li>
                 </ul>
+                <% if(l.remaining > 9){ %>
                 <ul class="list-inline type">
-                    <li class="list-inline-item">สินค้าคงเหลือ </li>
-                    <li class="list-inline-item" id="remain"><%= l.remaining %></li>
+                    <li class="list-inline-item">สินค้าคงเหลือมากกว่า </li>
+                    <li class="list-inline-item" id="remain">9</li>
                     <li class="list-inline-item"> ชิ้น</li>
                 </ul>
+                <% } %>
+                <% if(l.remaining > 0 && l.remaining <= 9){ %>
+                    <ul class="list-inline type">
+                        <li class="list-inline-item">สินค้าคงเหลือ </li>
+                        <li class="list-inline-item" id="remain"><%= l.remaining %></li>
+                        <li class="list-inline-item"> ชิ้น</li>
+                    </ul>
+                <% } %>
                 <ul class="list-inline buy">
                     <li class="list-inline-item" id="Lot-Type">
                         <!-- ส่งข้อมูลไปยังรถเข็น -->

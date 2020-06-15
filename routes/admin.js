@@ -119,7 +119,7 @@ router.post("/deleteLot=:id", isAdmin, function(req, res){
 router.post("/deletePrize=:id", isAdmin, function(req, res){
   let prizeId = req.params.id;
   prize.findOne({_id: prizeId}, function(err, delprize){
-    winner.deleteMany({number: delprize.number, t: delprize.t}, function(err, del){
+    winner.deleteMany({number: {$regex: new RegExp( delprize.number + '$')}, t: delprize.t, rank: delprize.rank}, function(err, del){
       if(err) console.log(err);
     })
   })
@@ -141,13 +141,15 @@ router.post("/prize", isAdmin, function(req, res){
   prize.create(n_prizes, function(err, del){
     if(err) console.log(err);
   })
-  purchase.find({number: n_number, t: n_date}, function(err, purchased){
+  //หาเลขลงท้าย
+  purchase.find({number: {$regex: new RegExp( n_number + '$')}, t: n_date}, function(err, purchased){
     if(err) console.log(err);
     else{
       purchased.forEach(element =>{ 
         let n_usr = element.usr;
         let n_orderTime = element.orderTime;
-        let n_winner = {usr:n_usr, number:n_number, t:n_date, rank:n_rank, prize:n_prize, orderTime: n_orderTime, status:false, image:"#"}
+        let n_num = element.number;
+        let n_winner = {usr:n_usr, number:n_num, t:n_date, rank:n_rank, prize:n_prize, orderTime: n_orderTime, status:false, image:"#"}
         winner.create(n_winner, function(err, won){
           if(err) console.log(err);
         })

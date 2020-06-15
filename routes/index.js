@@ -41,6 +41,18 @@ router.get('/blog/lotId=:id', async function(req, res, next) {
   res.render("details",{ l : product });
 });
 
+router.get('/cash', function(req, res, next){
+  if(req.user){
+    let user = req.user.usr;
+    winner.find({usr: user}, function(err, won){
+      if(err) console.log(err);
+      else{
+        res.render("cash", {won : won});
+      }
+    })
+  }
+});
+
 //รับข้อมูล id ลงตะกร้า
 router.post('/cart/', function(req, res){
   var lot_id = req.body.lot_id;
@@ -176,23 +188,67 @@ router.post('/paid', function(req, res){
         throw err;
       }
       else {
-        lot.findOne({number: lotNum, t: lotDate}, function(err, l){
+        lot.findOneAndUpdate({number: lotNum, t: lotDate}, {$inc: {remaining: -lotQty}}, function(err, l){
           if(err){
-            throw err;
+            res.render("failurePurchased");
+            console.log(err);
           } 
           else{
-            lot.updateOne({number: lotNum, t: lotDate}, {remaining: l.remaining - lotQty}, function(err, reduced){
-              if(err){
-                throw err;
-              } 
-            })
+            delete req.session.cart;
+            res.render("finishedPurchased");
           }
         })
-        
       }
     })
-    delete req.session.cart;
-    res.render("finishedPurchased");
+  }
+});
+
+router.post('/paidByFrag', function(req, res){
+  var moment = require("moment");
+  var now = moment().format("YYYY-MM-DDTHH:mm");
+  var cart = req.session.cart;
+  var user = req.user;
+  var userUsr = user.usr;
+  var totalFrag = 0;
+  for(item in cart){
+    totalFrag -= cart[item].qty * 100;
+  }
+  console.log(totalFrag);
+  if(user.fragment + totalFrag < 0){
+    res.render("failurePurchased");
+  }
+  else{
+    User.findOneAndUpdate({usr: userUsr}, {$inc: {fragment: totalFrag}}, function(err, u){
+      if(err) console.log(err);
+      else{
+        for(item in cart){
+          var lotNum = cart[item].number;
+          var lotQty = cart[item].qty;
+          var lotDate = cart[item].t;
+          var newOrder = new purchase({usr:userUsr, number: lotNum, qty: lotQty, t: lotDate, orderTime: now});
+          purchase.create(newOrder, function(err, pched){
+            if(err){
+              delete req.session.cart;
+              res.render("failurePurchased");
+              throw err;
+            }
+            else {
+              lot.findOneAndUpdate({number: lotNum, t: lotDate}, {$inc: {remaining: -lotQty}}, function(err, l){
+                if(err){
+                  res.render("failurePurchased");
+                  console.log(err);
+                } 
+                else{
+                  delete req.session.cart;
+                  res.render("finishedPurchased");
+                }
+              })
+            }
+          })
+          
+        }
+      }
+    })
   }
 });
 

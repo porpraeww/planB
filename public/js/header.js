@@ -7,4 +7,5 @@ $(document).on('click', 'ul li',function(){
         $('.menu-toggle').toggleClass('active')
         $('nav').toggleClass('active')
     })
-    })
+})
+
