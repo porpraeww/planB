@@ -30,9 +30,17 @@ router.get('/blogs', function(req, res, next) {
 router.get("/search",async function(req, res)
 {
   let key = req.query.keyword;
-  const result = await lot.find({number:{ $regex: key }});
-  console.log(result);
-  res.render("shop",{Lottery : result, key : key});
+  let isEnd = req.query.isEndOnly;
+  //ลงท้ายเท่านั้น
+  if(isEnd){
+    const result = await lot.find({number:{ $regex: new RegExp( key + '$') }});
+    res.render("shop",{Lottery : result, key : key});
+  }
+  //ตำแหน่งใดก็ได้
+  else{
+    const result = await lot.find({number:{ $regex: key}});
+    res.render("shop",{Lottery : result, key : key});
+  }
 });
 
 router.get('/blog/lotId=:id', async function(req, res, next) {
