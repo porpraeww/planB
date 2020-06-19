@@ -6,15 +6,14 @@
     font-size: 18px;
     font-family: 'Bai Jamjuree', sans-serif;
 }
+.head, .main{
+    background:  rgb(66, 103, 178);
+}
 .head h3{
     height: 46px;
     padding-top: 5px;
+    color: white;
     font-family: 'Bai Jamjuree', sans-serif;
-}
-.button{
-    font-size: 15px;
-    font-family: 'Bai Jamjuree', sans-serif;
-    float: right;
 }
 .container h4{
     text-align: center;
@@ -30,4 +29,10 @@
 .table tr th{
     font-size: 15px;
     font-family: 'Bai Jamjuree', sans-serif;
+}
+@media only screen and (max-width: 780px)
+{
+    .table{
+        margin-right: 200px;
+    }
 }

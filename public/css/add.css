@@ -6,9 +6,13 @@
   font-size: 18px;
   font-family: 'Bai Jamjuree', sans-serif;
 }
+.head, .main{
+  background:  rgb(66, 103, 178);
+}
 .head h3{
   height: 46px;
   padding-top: 5px;
+  color: white;
   font-family: 'Bai Jamjuree', sans-serif;
 }
 .button{
@@ -23,9 +27,5 @@
 .table tr th{
   font-size: 15px;
   text-align: center;
-  font-family: 'Bai Jamjuree', sans-serif;
-}
-.modal-body{
-  font-size: 15px;
   font-family: 'Bai Jamjuree', sans-serif;
 }

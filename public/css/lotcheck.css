@@ -8,11 +8,11 @@
     color: crimson;
     display: none;
 }
-.dropdown-menu {
+/* .dropdown-menu {
     width: 300px !important;
     height: 250px !important;
     line-height: 40%;
-}
+} */
 tr{
     font-size: 15px;
 }

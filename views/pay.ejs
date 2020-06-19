@@ -1,38 +1,43 @@
 <%- include("partials/header") %>
+
 <div class="container">
-    <h3>ช่องทางการชำระเงิน</h3>
-    <div class="row justify-content-md-center"> 
+    <br>
+    <h4 style="text-align: center;">ช่องทางการชำระเงิน</h4>
+    <br>
+    <div class="row justify-content-center"> 
         <div class="col-lg-6 col-md-12">
-            <img class="img-fluid" src="/images/cat1.jpg">
+            <img class="img-fluid" src="/images/cat1.jpg" style="margin-bottom: 10px;">
         </div>
         <div class="col-lg-6 col-md-12">
             <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label text-md-right">เลขบัตรเครดิต</label>
+                <label for="" class="col-md-4 col-form-label text-md-right" style="font-size: 15px;">เลขบัตรเครดิต</label>
                 <div class="col-md-6">
                     <input type="text" name="creditcard" value="" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label text-md-right">CVC</label>
+                <label for="" class="col-md-4 col-form-label text-md-right" style="font-size: 15px;">CVC</label>
                 <div class="col-md-6">
                     <input type="text" name="CVC" value="" placeholder="XXX" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-md-4 col-form-label text-md-right">วันหมดอายุ</label>
+                <label for="" class="col-md-4 col-form-label text-md-right" style="font-size: 15px;">วันหมดอายุ</label>
                 <div class="col-md-6">
                     <input type="text" name="exp" value="" placeholder="MM/YY" class="form-control">
                 </div>
             </div>
-            <p>คำเตือน : เมื่อซื้อสินค้าแล้วไม่สามารถยกเลิกได้ และไม่ขอรับประกันความปลอดภัยข้อมูลของบัตรเครดิตของท่าน!!</p>
-            <% if(locals.user){ %>
-                <form class="form-group" action="/paidByFrag" method="POST" >
-                    <input type="submit" name="" value="ชำระด้วยชิ้นส่วนสลาก" class="btn btn-primary">
-                </form>
-                <form class="form-group" action="/paid" method="POST" >
-                    <input type="submit" name="" value="ชำระเงิน" class="btn btn-primary">
-                </form>
-            <% } %>
+            <p style="color: red; font-size: 15px; text-align: center;">คำเตือน : เมื่อซื้อสินค้าแล้วไม่สามารถยกเลิกได้ และไม่ขอรับประกันความปลอดภัยข้อมูลของบัตรเครดิตของท่าน!!</p>
+            <div class="row justify-content-center">
+                <% if(locals.user){ %>
+                    <form class="form-group" action="/paidByFrag" method="POST" >
+                        <input type="submit" name="" value="ชำระด้วยชิ้นส่วนสลาก" class="btn btn-primary" style="font-size: 15px; margin-left: 12px;">
+                    </form>
+                    <form class="form-group" action="/paid" method="POST" >
+                        <input type="submit" name="" value="ชำระเงิน" class="btn btn-primary" style="font-size: 15px; margin-left: 10px;">
+                    </form>
+                <% } %>
+            </div>
         </div>
     </div>
 </div>

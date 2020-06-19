@@ -1,19 +1,19 @@
 <%- include("partials/header") %>
-    <link rel="stylesheet" href="/css/history.css">
 
 <div class="container-fluid">
 <br>
     <div class="row justify-content-md-center" style="min-height: 400px"> 
         <div class="col-12 col-md-8 text-center">
             <h4>ประวัติการซื้อ</h4>
+            <br>
             <div class="table-responsive">
                 <% if(hist.length == 0) { %>
-                    <p>ไม่พบประวัติการซื้อ</p>
+                    <p style="color: red;">ไม่พบประวัติการซื้อ</p>
                 <% } %>
                     
                 <% if(hist.length != 0) { %>
                 <table class="table table-hover">
-                    <thead>
+                    <thead style="font-size: 15px;">
                         <th scope="col">หมายเลขสั่งซื้อ</th>
                         <th scope="col">เวลาซื้อ</th>
                         <th scope="col">งวดสลาก</th>
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <% hist.forEach(function (h) { %>
-                            <tr>
+                            <tr style="font-size: 15px;">
                                 <td><%= h._id %></td>
                                 <td><%= m(h.orderTime).format("DD-MMMM-YYYY HH:mm") %></td>
                                 <td><%= h.t %></td>

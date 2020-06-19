@@ -38,9 +38,6 @@
 						<li>
 							<a href="/cash">ขึ้นเงิน</a>
 						</li>
-						<!-- <li>
-							<a href="#">ดีใจจัง! กดแล้วได้ซื้อเลย</a>
-						</li> -->
 						<% } %>
 						<li>
 							<a href="/game">XO หรรษาพารวย</a>
@@ -63,6 +60,11 @@
 								<div class="form-group">
 									<a href="/blogs" style="vertical-align: text-bottom; color: crimson;">ชิ้นส่วนที่มี : <%= user.fragment %> ชิ้น</a>
 								</div>
+								<% if(locals.user.admin){ %>
+								<div class="form-group">
+									<a href="/admin/" style="vertical-align: text-bottom; color: blue;">เข้าสู่หน้า admin</a>
+								</div>
+								<% } %>
 								<div class="form-group">
 									<a href="/users/logout" style="vertical-align: text-bottom; color: black">ออกจากระบบ</a>
 								</div> 

@@ -18,35 +18,34 @@
   <body>    
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
       <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
-      <a href="/" class="logo"><img src ="/images/khohuai.png"></a>
+      <a href="/" class="logo"><img src ="/images/khohuai1.png"></a>
       <a href="/admin/add" class="w3-bar-item w3-button">เพิ่ม/ลบ สลาก</a>
       <a href="/admin/lotday" class="w3-bar-item w3-button">ผลออกสลาก</a>
       <a href="/admin/status" class="w3-bar-item w3-button">สถานะการโอนเงิน</a>
     </div>
     <div class="w3-main" style="margin-left:200px">
-      <div class="w3-teal">
-        <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+      <div class="main">
+        <button class="w3-button w3-white w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
         <div class="head w3-container">
           <h3>ผู้ดูแลระบบ</h3>
         </div>
       </div>
-      <div class="container col-sm-12">
+      <div class="container col-md-12">
         <br>
         <h4>เพิ่ม/ลด จำนวนสลาก</h4>
         <br>
-        <div class="table-responsive" style="min-height: 400px">
-          <br>
+        <div class="table table-hover" style="min-height: 400px">
           <div class="button">
-              <a href="/admin/addLot" type="button" class="btn btn-info btn-md" target="_blank">เพิ่ม</a>
+              <a href="/admin/addLot" type="button" class="btn btn-info btn-md">เพิ่ม</a>
           </div>
-          <br><br>
+          <br>
           <table id="user_data" class="table table-hover">
             <thead>
               <tr>
-                <th width="35%">หมายเลขสลาก</th>
-                <th width="35%">ราคา</th>
-                <th width="35%">ส่วนลด</th>
-                <th width="10%">ลบ</th>
+                <th width="25%">หมายเลขสลาก</th>
+                <th width="25%">ราคา</th>
+                <th width="25%">ส่วนลด</th>
+                <th width="25%">ลบ</th>
               </tr>
             </thead>
             <% Lottery.forEach(function(l){ %>
@@ -62,44 +61,6 @@
             </tbody>
           <% }) %>
           </table>
-        </div>
-      </div>
-      <div id="userModal" class="modal fade">
-        <div class="modal-dialog">
-          <form method="post" id="user_form" action="/admin/add" enctype="multipart/form-data">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">เพิ่มสลาก</h4>
-              </div>
-              <div class="modal-body">
-                <label>หมายเลขสลาก</label>
-                <input type="text" name="number" id="number" class="form-control" />
-                <br/>
-                <label>ราคา</label>
-                <input type="text" name="price" id="price" class="form-control" />
-                <br/>
-                <label>ส่วนลด</label>
-                <input type="text" name="discount" id="discount" class="form-control" />
-                <br/>
-                <label>งวดที่ออก</label>
-                <input type="text" name="date" id="date" class="form-control" placeholder="YYYY-MM-DD" />
-                <br/>
-                <label>จำนวนสลาก</label>
-                <input type="text" name="remain" id="remain" class="form-control" />
-                <br/>
-                <label>แนบรูปสลาก</label>
-                <input type="file" name="lot_image" id="user_image" />
-                <span id="user_uploaded_image"></span>
-              </div>
-              <div class="modal-footer">
-                <input type="hidden" name="user_id" id="user_id" />
-                <input type="hidden" name="operation" id="operation" />
-                <input type="submit" name="action" id="addLotBtn" class="btn btn-success" value="เพิ่ม" />
-                <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
     </div>

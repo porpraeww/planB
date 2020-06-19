@@ -7,11 +7,12 @@ div{
 .container .row .input-group .form-control,
 .container .row .input-group .botton1{
     font-size: 15px;
+    margin-bottom: 10px;
 }
 .container .row .container .form-check-inline{
     font-size: 15px;
 }
-.container .row p{
+.container .row .shop p{
     font-size: 15px;
     margin: 10px;
 }

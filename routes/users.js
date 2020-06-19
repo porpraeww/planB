@@ -73,7 +73,7 @@ router.post('/register',[
         if(!user){
           User.createUser(newUser,function(err,newdata){
             if(err){
-              throw error;
+              console.log(err);
             }
             else{
               res.location("/");
