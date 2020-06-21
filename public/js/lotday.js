@@ -59,3 +59,10 @@ newthree.splice(dok,1)
 newfour.splice(dok,1)
 listshow();
 }
+
+$('u').click(function(e){
+  var result = confirm("คุณแน่ใจว่าต้องการลบ");
+  if(!result) {
+      e.preventDefault();
+  }
+});

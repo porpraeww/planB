@@ -1,5 +1,8 @@
 <%- include("partials/header") %>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/register.js" defer></script>
 
 <div class="container1">
     <% if(locals.errors){ %>
@@ -36,7 +39,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">ยืนยันรหัสผ่าน</label>
                             <div class="col-md-6">
-                                <input type="password" name="repwd" value="" class="form-control" required>
+                                <input type="password" name="repwd" id="repwd" value="" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
