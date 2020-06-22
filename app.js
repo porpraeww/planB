@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var logger = require('morgan');
 var mongo = require("mongodb");
 const mongoose = require("mongoose");
-var db = mongoose.connect('mongodb://localhost:27017/PlanB', {useNewUrlParser: true,useUnifiedTopology: true});
+var db = mongoose.connect('mongodb+srv://AbsolutelyNotAdmin:SuperSecurityPassword@planb-rgsxo.mongodb.net/PlanB?retryWrites=true&w=majority', {useNewUrlParser: true,useUnifiedTopology: true});
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
